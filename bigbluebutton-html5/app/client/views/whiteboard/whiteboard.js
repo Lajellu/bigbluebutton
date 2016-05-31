@@ -1,6 +1,7 @@
 let fakeUpload;
 
 // scale the whiteboard to adapt to the resized window
+//this is the window
 this.scaleWhiteboard = function(callback) {
   let adjustedDimensions;
   adjustedDimensions = scaleSlide(getInSession('slideOriginalWidth'), getInSession('slideOriginalHeight'));
@@ -66,6 +67,7 @@ Template.whiteboard.events({
       return toggleEmojisFAB();
     }
   },
+  //the emoji gets the class activeEmojiButton when it's the one chosen
   'click .activeEmojiButton'(event) {
     if($('.activeEmojiButton').css('opacity') === '1') {
       BBB.setEmojiStatus(

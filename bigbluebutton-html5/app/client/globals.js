@@ -119,8 +119,10 @@ Handlebars.registerHelper("getWhiteboardTitle", () => {
   return BBB.currentPresentationName() || "No active presentation";
 });
 
+//store user's emoji in ref
 Handlebars.registerHelper("getCurrentUserEmojiStatus", () => {
   let ref, ref1;
+  //set ref to the current user. if ref.user is not null, and the currentUser is not null store emoji_status in ref
   return (ref = BBB.getCurrentUser()) != null ? (ref1 = ref.user) != null ? ref1.emoji_status : void 0 : void 0;
 });
 
@@ -144,6 +146,7 @@ Handlebars.registerHelper("privateChatName", () => {
   }
 });
 
+//return true if user has a set emoji
 Handlebars.registerHelper("isCurrentUserEmojiStatusSet", () => {
   return BBB.isCurrentUserEmojiStatusSet();
 });
@@ -292,6 +295,7 @@ Handlebars.registerHelper("getPollQuestions", () => {
   }
 });
 
+//emoji names to compare to user emoji in template usernameEntry from user_item
 Template.registerHelper('emojiIcons', function () {
   return [
     { name: 'sad', icon: 'sad-face', title: '' },
@@ -304,11 +308,18 @@ Template.registerHelper('emojiIcons', function () {
 });
 
 this.getSortedUserList = function(users) {
+  //If there is more than one user
   if((users != null ? users.length : void 0) > 1) {
+    //Q3 - where is users and users.sort defined
     users.sort((a, b) => {
       let aTime, bTime;
+
+      //if a and b are moderators
       if(a.user.role === "MODERATOR" && b.user.role === "MODERATOR") {
+        //if emoji time is set for a and b
         if(a.user.set_emoji_time && b.user.set_emoji_time) {
+
+          //store the times of the user in a and b
           aTime = a.user.set_emoji_time.getTime();
           bTime = b.user.set_emoji_time.getTime();
           if(aTime < bTime) {
@@ -316,15 +327,21 @@ this.getSortedUserList = function(users) {
           } else {
             return 1;
           }
+        //if emoji time is only set for a
         } else if(a.user.set_emoji_time) {
           return -1;
+        //if emoji time is only set for b
         } else if(b.user.set_emoji_time) {
           return 1;
         }
+
+      //if only a is a moderator
       } else if(a.user.role === "MODERATOR") {
         return -1;
+      //if only b is a moderator
       } else if(b.user.role === "MODERATOR") {
         return 1;
+      //if emoji time is set for a and b (same block a above but in diff moderator scope)
       } else if(a.user.set_emoji_time && b.user.set_emoji_time) {
         aTime = a.user.set_emoji_time.getTime();
         bTime = b.user.set_emoji_time.getTime();
@@ -333,8 +350,10 @@ this.getSortedUserList = function(users) {
         } else {
           return 1;
         }
+      //if emoji time is only set for a
       } else if(a.user.set_emoji_time) {
         return -1;
+      //if emoji time is only set for b
       } else if(b.user.set_emoji_time) {
         return 1;
       } else if(!a.user.phone_user && !b.user.phone_user) {
@@ -867,7 +886,9 @@ this.adjustChatInputHeight = function() {
 };
 
 this.toggleEmojisFAB = function() {
+  //Check if any element with css class .FABContainer has a class named "openedFAB":
   if($('.FABContainer').hasClass('openedFAB')) {
+    // index of nth-child of a button tag starting with 1 - set the opacity to the opacity already set
     $('.FABContainer > button:nth-child(2)').css('opacity', $('.FABContainer > button:nth-child(2)').css('opacity'));
     $('.FABContainer > button:nth-child(3)').css('opacity', $('.FABContainer > button:nth-child(3)').css('opacity'));
     $('.FABContainer > button:nth-child(4)').css('opacity', $('.FABContainer > button:nth-child(4)').css('opacity'));

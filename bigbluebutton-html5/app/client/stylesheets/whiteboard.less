@@ -544,6 +544,8 @@
   }
 }
 
+//& sticks them together, below compiles to:
+//.FABContainer.closedFAB .activeEmojiButton
 .FABContainer {
   &.closedFAB {
     .activeEmojiButton,
@@ -554,6 +556,7 @@
   }
 }
 
+//changes the color of the raise hand button (not the hand)
 .FABTriggerButton, .inactiveEmojiButton {
   background-color: #3896D3;
 }
@@ -562,7 +565,9 @@
   background-color: #3896D3;
 }
 
+
 .FABTriggerButton {
+  //changes the position of the raise hand button
   position: absolute;
   right: 4px;
   bottom: 4px;
@@ -577,12 +582,14 @@
   }
 }
 
+
 .openedFAB {
   .FABTriggerButton {
     i {
       opacity: 0.5;
     }
   }
+  //forwards is not the direction it moves: applies styles after finished executing
   button:nth-child(2), button:nth-child(3) {
     animation: increaseOpacity 0.15s forwards;
   }
@@ -610,6 +617,7 @@
   }
 }
 
+//changes the background color of each emoji when you hover
 .FABContainer > button:nth-child(n + 2):hover {
   background-color: #34495E;
 }
@@ -634,6 +642,7 @@
       outline:0;
     }
   }
+  //.FABContainer > button:nth-child(n + 2); same as .FABContainer.button:nth-child(n + 2)
   & > button:nth-child(n + 2) {
     position: absolute;
     height: 50px;
@@ -641,28 +650,28 @@
     opacity: 0;
   }
   & > button:nth-child(2) {
-    right: 70px;
-    bottom: 6px;
+    right: 5px;
+    bottom: 59px;
   }
   & > button:nth-child(3) {
-    right: 70px;
-    bottom: 59px;
+    right: 5px;
+    bottom: 118px;
   }
   & > button:nth-child(4) {
-    right: 130px;
-    bottom: 6px;
+    right: 5px;
+    bottom: 177px;
   }
   & > button:nth-child(5) {
-    right: 130px;
-    bottom: 59px;
+    right: 5px;
+    bottom: 236px;
   }
   & > button:nth-child(6) {
-    right: 190px;
-    bottom: 6px;
+    right: 5px;
+    bottom: 295px;
   }
   & > button:nth-child(7) {
-    right: 190px;
-    bottom: 59px;
+    right: 5px;
+    bottom: 354px;
   }
 }
 
