@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import WhiteboardShapeModel from './shape-factory/component.jsx';
 import Cursor from './cursor/component.jsx';
-import SlideControlsContainer from './slide-controls/container.jsx'; //I added
+import SlideControlsContainer from './slide-controls/container.jsx'; 
 import { createContainer } from 'meteor/react-meteor-data';
 import Slide from './slide/component.jsx';
 import styles from './styles.scss';

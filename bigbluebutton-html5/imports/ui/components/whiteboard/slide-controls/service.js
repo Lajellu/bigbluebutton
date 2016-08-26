@@ -1,4 +1,4 @@
-import SlideControls from './component.jsx';
+import SlideControls from './component.jsx';   /////////// TEST IF YOU CAN DELETE THIS //////////
 import AuthSingleton from '/imports/ui/services/auth/index.js';
 import Users from '/imports/api/users';
 import Slides from '/imports/api/slides';

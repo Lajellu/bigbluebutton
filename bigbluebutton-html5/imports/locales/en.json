@@ -33,5 +33,21 @@
   "app.dropdown.optionsDesc": "Open options",
   "app.dropdown.fullscreenDesc": "Make the settings menu fullscreen",
   "app.dropdown.settingsDesc": "Change the general settings",
-  "app.dropdown.leaveSessionDesc": "Leave the meeting"
+  "app.dropdown.leaveSessionDesc": "Leave the meeting",
+  "app.emoji.EmojiMenuTriggerLabel": "Status menu",
+  "app.emoji.EmojiMenuTriggerDesc": "Open the status menu to choose a status",
+  "app.emoji.awayLabel": "Away",
+  "app.emoji.awayDesc": "Choose your status as away",
+  "app.emoji.raiseLabel": "Raise",
+  "app.emoji.raiseDesc": "Raise your hand to ask a question",
+  "app.emoji.undecidedLabel": "Undecided",
+  "app.emoji.undecidedDesc": "Choose your status as undecided",
+  "app.emoji.confusedLabel": "Confused",
+  "app.emoji.confusedDesc": "Choose your status as confused",
+  "app.emoji.sadLabel": "Sad",
+  "app.emoji.sadDesc": "Choose your status as sad",
+  "app.emoji.happyLabel": "Happy",
+  "app.emoji.happyDesc": "Choose your status as happy",
+  "app.emoji.clearLabel": "Clear",
+  "app.emoji.clearDesc": "Clear your status"
 }

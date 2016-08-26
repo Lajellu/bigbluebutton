@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import styles from './styles.scss';
+import EmojiContainer from '../emoji/container.jsx'
 
 import Button from '../button/component';
 
@@ -41,14 +42,7 @@ export default class ActionsBar extends Component {
             size={'lg'}
             circle={true}
           />
-          <Button
-            onClick={this.handleClick}
-            label={'Raise'}
-            color={'primary'}
-            icon={'hand'}
-            size={'lg'}
-            circle={true}
-          />
+          <EmojiContainer />
         </div>
         <div className={styles.right}>
         </div>
