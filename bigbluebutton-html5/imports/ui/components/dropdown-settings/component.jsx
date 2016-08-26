@@ -1,8 +1,7 @@
-import React, { Component, PropTyes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import Icon from '/imports/ui/components/icon/component';
 import Button from '/imports/ui/components/button/component';
-import classNames from 'classnames';
 import styles from './styles';
 import { FormattedMessage } from 'react-intl';
 import SettingsModal from '../modals/settings/component';

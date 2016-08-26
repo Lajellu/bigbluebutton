@@ -1,0 +1,64 @@
+@import "../../stylesheets/variables/_all";
+
+.emojiMenuItem {
+  padding-top: 10px;
+}
+
+.emojiMenuItemText {
+  margin-left: 10px;
+}
+
+.menuList {
+  list-style-type: none;
+  padding-left: 0px;
+}
+
+.hrDropdown {
+  border: 0.3px solid $color-gray-light;
+  width: 165px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdownActiveContent {
+  margin-top: 14px;
+  margin-right: -3px;
+  padding-left: 15px;
+  height: auto;
+  width: 190px;
+  display: block;
+  background-color: #ffffff;
+  position: absolute;
+  top: -365px;
+  right: -119px;
+  text-align: left;
+  font-size: $font-size-base;
+  border-radius: 3%;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+}
+
+ .triangleOnDropdown {
+   position: absolute;
+   top: -25px;
+   margin-top: 5px;
+   margin-left: -2px;
+   width: 0;
+   height: 0;
+   // CSS below creates the triange
+   border-top: 21px solid #ffffff;
+   border-left: 21px solid transparent;
+   border-right: 21px solid transparent;
+ }
+
+ .iconColor {
+   font-size: $font-size-base;
+   color: $color-gray-light;
+ }
+
+.triggerBtn {
+
+}
