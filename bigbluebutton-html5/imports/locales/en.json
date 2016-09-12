@@ -52,5 +52,11 @@
   "app.emoji.happyLabel": "Happy",
   "app.emoji.happyDesc": "Choose your status as happy",
   "app.emoji.clearLabel": "Clear",
-  "app.emoji.clearDesc": "Clear your status"
+  "app.emoji.clearDesc": "Clear your status",
+  "app.leaveConfirmation.title": "Leave Session",
+  "app.leaveConfirmation.message": "Do you want to leave this meeting?",
+  "app.leaveConfirmation.confirmLabel": "Leave",
+  "app.leaveConfirmation.confirmDesc": "Logs you out of the meeting",
+  "app.leaveConfirmation.dismissLabel": "Cancel",
+  "app.leaveConfirmation.dismissDesc": "Closes and rejects the leave confirmation"
 }
