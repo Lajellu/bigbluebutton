@@ -52,6 +52,8 @@ export default class Modal extends Component {
   handleConfirm() {
     const { confirm } = this.props;
     confirm.callback(...arguments);
+    this.setState({ isOpen: false });
+    clearModal();
   }
 
   componentDidUpdate(prevProps, prevState) {

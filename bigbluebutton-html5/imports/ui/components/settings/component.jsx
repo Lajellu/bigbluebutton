@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import Icon from '/imports/ui/components/icon/component';
 import Button from '/imports/ui/components/button/component';
 import Modal from '/imports/ui/components/modal/component';
@@ -10,10 +10,30 @@ import classNames from 'classnames';
 import ReactDOM from 'react-dom';
 import styles from './styles.scss';
 
+const propTypes = {
+  /** The font size the user saved
+    */
+  savedFontSize: PropTypes.string.isRequired,
+
+  /** The font size name the user saved
+   * Possible values: EXTRA_SMALL, SMALL, MEDIUM, LARGE, EXTRA_LARGE
+   */
+  savedFontSizeName: PropTypes.string.isRequired,
+
+  actions: PropTypes.object.isRequired,
+};
+
 export default class Settings extends React.Component {
   constructor(props) {
     super(props);
+    console.log("settings::constructor");
+    console.log("settings::constructor savedFontSize");
+    console.log(this.props.savedFontSize);
+    console.log("settings::constructor savedFontSizeName");
+    console.log(this.props.savedFontSizeName);
+
     this.submenus = [];
+    this.state = { tempFontSize: this.props.savedFontSize };
   }
 
   componentWillMount() {
@@ -42,10 +62,38 @@ export default class Settings extends React.Component {
       title: this.submenus[curr].props.title,
       prependIconName: this.submenus[curr].props.prependIconName,
       icon: this.submenus[curr].props.icon,
+      saveTempChanges: this.saveTempChanges.bind(this),
+      tempFontSize: this.state.tempFontSize,
+      actions: this.props.actions,
     };
 
     const Submenu = this.submenus[curr].componentName;
     return <Submenu {...props}/>;
+  }
+
+  saveTempChanges(key, value) {
+    console.log("settings::saveTempChanges");
+    this.setState({ [key]: value }, () => {
+      console.log("this.state");
+      console.log(this.state);
+    });
+  }
+
+  savePermanentChanges() {
+    console.log("Settings::savePermanentChanges()");
+    console.log("this.state");
+    console.log(this.state);
+
+    console.log(Object.keys(this.state));
+    console.log(Object.values(this.state));
+
+    const keys = Object.keys(this.state);
+    const values = Object.values(this.state);
+
+    for (let i = 0; i < keys.length; i++) {
+      ClientServices.storePermanentSettings.call(this, keys[i], values[i]);
+    }
+
   }
 
   /* When an option in the menu is clicked, set the activeSubmenu and focusSubmenu
@@ -161,18 +209,19 @@ export default class Settings extends React.Component {
         confirm={{
           callback: (() => {
             this.setState({ activeSubmenu: 0, focusSubmenu: 0 });
+            this.savePermanentChanges();
             console.log('SHOULD APPLY SETTINGS CHANGES');
           }),
-          label: 'Done',
+          label: 'Save',
           description: 'Saves the changes and close the settings menu',
         }}
         dismiss={{
           callback: (() => {
             this.setState({ activeSubmenu: 0, focusSubmenu: 0 });
-            console.log('SHOULD DISCART SETTINGS CHANGES');
+            console.log('SHOULD DISCARD SETTINGS CHANGES');
           }),
           label: 'Cancel',
-          description: 'Discart the changes and close the settings menu',
+          description: 'Discard the changes and close the settings menu',
         }}>
         <div className={styles.full} role='presentation'>
           <div className={styles.settingsMenuLeft}>
@@ -183,7 +232,9 @@ export default class Settings extends React.Component {
                   onKeyDown={this.handleKeyDown.bind(this)}
                   onFocus={this.handleFocus.bind(this, index)}
                   className={classNames(styles.settingsSubmenuItem,
-                    index == this.state.activeSubmenu ? styles.settingsSubmenuItemActive : null)}>
+                    index == this.state.activeSubmenu ? styles.settingsSubmenuItemActive : null)}
+
+                  >
                   <Icon key={index} prependIconName={value.props.prependIconName}
                     iconName={value.props.icon} title={value.props.title}/>
                   <span className={styles.settingsSubmenuItemText}>{value.props.title}</span>
@@ -201,3 +252,4 @@ export default class Settings extends React.Component {
 };
 
 Settings.defaultProps = { title: 'Settings' };
+Settings.propTypes = propTypes;

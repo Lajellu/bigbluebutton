@@ -1,18 +1,63 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import Modal from 'react-modal';
 import Icon from '/imports/ui/components/icon/component';
 import Button from '/imports/ui/components/button/component';
 import BaseMenu from '../base/component';
 import ReactDOM from 'react-dom';
-import FontControl from '/imports/api/FontControl';
+import ClientServices from '/imports/ui/services/client-settings/index';
 import styles from '../styles.scss';
+
+const propTypes = {
+  /**
+   * Method that saves the temporary changes the client has made to the settings menu
+   */
+  saveTempChanges: PropTypes.func.isRequired,
+
+  /**
+   * The font size the user has chosen, may or may not yet be saved
+   */
+  tempFontSize: PropTypes.string.isRequired,
+
+  /**
+   * Methods that call ClientService's methods
+   */
+  actions: PropTypes.object.isRequired,
+};
 
 export default class ApplicationMenu extends BaseMenu {
   constructor(props) {
     super(props);
-    this.state = {
-      currentFontSize: FontControl.fontSizeEnum.MEDIUM,
-    };
+    console.log("ApplicationMenu::constructor");
+    console.log("ApplicationMenu::constructor this.props.tempFontSize");
+    console.log(this.props.tempFontSize);
+  }
+
+  saveTempIncFontChanges() {
+    console.log("application::saveTempIncFontChanges");
+    console.log("application::saveTempIncFontChanges this");
+    console.log(this);
+
+    // Prepare the in-range user's font choice, and apply the css
+    const fs = this.props.actions.saveTempIncFontChangesHandler.call(this);
+
+    console.log("application::saveTempIncFontChanges fs");
+    console.log(fs);
+
+    // Save the temp changes in parent state (with rest of temp changes)
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Changes to the settings state should trigger rerender, and cause appl.props.tempFontSize to change
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+    this.props.saveTempChanges("tempFontSize", fs);
+  }
+
+  saveTempDecFontChanges() {
+    console.log("application::saveTempDecFontChanges");
+
+    // Prepare the in-range user's font choice, and apply the css
+    const fs = this.props.actions.saveTempDecFontChangesHandler.call(this);
+
+    // Save the temp changes in parent state (with rest of temp changes)
+    this.props.saveTempChanges("tempFontSize", fs);
   }
 
   getContent() {
@@ -37,11 +82,11 @@ export default class ApplicationMenu extends BaseMenu {
             <p>Font size</p>
           </div>
           <div className={styles.fontBarMid}>
-            <p>{FontControl.getFontSizeName.call(this)}</p>
+            <p>{this.props.actions.getFontSizeNameHandler(this.props.tempFontSize)}</p>
           </div>
           <div className={styles.fontBarRight} role='presentation'>
             <Button
-              onClick={FontControl.increaseFontSize.bind(this)}
+              onClick={this.saveTempIncFontChanges.bind(this)}
               icon={'circle-add'}
               circle={true}
               tabIndex={9}
@@ -54,7 +99,7 @@ export default class ApplicationMenu extends BaseMenu {
             <div id='sizeUpDesc' hidden>
               Increases the font size of the application.</div>
             <Button
-              onClick={FontControl.decreaseFontSize.bind(this)}
+              onClick={this.saveTempDecFontChanges.bind(this)}
               icon={'circle-minus'}
               circle={true}
               tabIndex={10}

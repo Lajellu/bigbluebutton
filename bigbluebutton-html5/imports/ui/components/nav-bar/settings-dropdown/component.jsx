@@ -4,7 +4,7 @@ import styles from '../styles';
 
 import { showModal } from '/imports/ui/components/app/service';
 import LogoutConfirmation from '/imports/ui/components/logout-confirmation/component';
-import Settings from '/imports/ui/components/settings/component';
+import SettingsContainer from '/imports/ui/components/settings/container';
 
 import Button from '/imports/ui/components/button/component';
 import Dropdown from '/imports/ui/components/dropdown/component';
@@ -81,7 +81,7 @@ const toggleFullScreen = () => {
   }
 };
 
-const openSettings = () => showModal(<Settings />);
+const openSettings = () => showModal(<SettingsContainer />);
 
 const openLogoutConfirmation = () => showModal(<LogoutConfirmation />);
 
