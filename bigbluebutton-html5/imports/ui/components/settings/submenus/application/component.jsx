@@ -4,7 +4,6 @@ import Icon from '/imports/ui/components/icon/component';
 import Button from '/imports/ui/components/button/component';
 import BaseMenu from '../base/component';
 import ReactDOM from 'react-dom';
-import ClientServices from '/imports/ui/services/client-settings/index';
 import styles from '../styles.scss';
 
 const propTypes = {

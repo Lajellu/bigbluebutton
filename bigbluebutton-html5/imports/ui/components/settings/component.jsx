@@ -91,7 +91,7 @@ export default class Settings extends React.Component {
     const values = Object.values(this.state);
 
     for (let i = 0; i < keys.length; i++) {
-      ClientServices.storePermanentSettings.call(this, keys[i], values[i]);
+      this.props.actions.savePermanentSettingsHandler(keys[i], values[i]);
     }
 
   }

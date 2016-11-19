@@ -18,41 +18,28 @@ class ClientServices {
   }
 
   // Changing the font size in the CSS
-  static applyFontSize() {
+  static applyFontSize(fontSize) {
     console.log("ClientServices::applyFontSize");
-    console.log("ClientServices::applyFontSize this");
-    console.log(this);
-
-    console.log("ClientServices::applyFontSize this.state");
-    console.log(this.state);
+    // console.log("ClientServices::applyFontSize this");
+    // console.log(this);
+    //
+    // console.log("ClientServices::applyFontSize this.state");
+    // console.log(this.state);
 
     // if (this.props && this.props.tempFontSize) {
     //   console.log("ClientServices::applyFontSize this.props.tempFontSize");
     //   console.log(this.props.tempFontSize);
     // }
 
-    const size = (this.state && this.state.tempFontSize) ?
-                    ClientServices.fontSizeEnum.properties[this.state.tempFontSize].size :
-                    ClientServices.fontSizeEnum.properties[this.props.tempFontSize].size;
+    // const size = (this.state && this.state.tempFontSize) ?
+    //                 ClientServices.fontSizeEnum.properties[this.state.tempFontSize].size :
+    //                 ClientServices.fontSizeEnum.properties[this.props.tempFontSize].size;
 
+    const size = ClientServices.fontSizeEnum.properties[fontSize].size;
     console.log("size");
     console.log(size);
     document.getElementsByTagName('html')[0].style.fontSize = size;
   }
-
-  // static loadFontSize() {
-  //   const existingFontSize = localStorage.getItem('tempFontSize');
-  //   let newFontSize = null;
-  //   if (existingFontSize &&
-  //     existingFontSize >= _this.fontSizeEnum.EXTRA_SMALL &&
-  //     existingFontSize <= _this.fontSizeEnum.EXTRA_LARGE) {
-  //     newFontSize = existingFontSize;
-  //   } else {
-  //     newFontSize = FontControl.fontSizeEnum.MEDIUM;
-  //   }
-  //
-  //   FontControl.storeFontSize.call(this, newFontSize);
-  // }
 
   // Load the font size that has been Permanently saved (in localStorage)
   static loadFontSize() {
@@ -71,23 +58,19 @@ class ClientServices {
     }
 
     // If the font size had been stored out of bounds, store medium instead
-    ClientServices.storePermanentSettings.call(this, 'tempFontSize', newFontSize);
+    ClientServices.storePermanentSettings('tempFontSize', newFontSize);
   }
 
   // Permanently store (until deleted) UI Settings
   static storePermanentSettings(key, value) {
     console.log("ClientServices::storePermanentSettings()");
     localStorage.setItem(key, value);
-    ClientServices.applyFontSize.call(this);
-  }
 
-  // static storeFontSize(fs) {
-  //   console.log("FontControl::storeFontSize()");
-  //   localStorage.setItem('bbbFontSize', fs);
-  //   this.setState({ currentFontSize: fs }, function () {
-  //     FontControl.applyFontSize.call(this);
-  //   });
-  // }
+    switch (key) {
+      case "tempFontSize":
+        ClientServices.applyFontSize(value);
+    }
+  }
 
   static increaseFontSize() {
     const fs = Math.min(this.state.currentFontSize + 1, ClientServices.fontSizeEnum.EXTRA_LARGE);
@@ -99,8 +82,15 @@ class ClientServices {
     ClientServices.storeFontSize.call(this, fs);
   };
 
-  static getFontSize() {
-    return localStorage.getItem('tempFontSize');
+  static getSavedFontSize() {
+    /////////////////////////////////////
+    // Chang applyFontSize to accept a value, not this
+    /////////////////////////////////////
+    const existingFontSize = localStorage.getItem('tempFontSize');
+    ClientServices.applyFontSize(existingFontSize);
+
+    return existingFontSize;
+
   };
 
   static getSavedFontSizeName() {

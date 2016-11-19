@@ -1,7 +1,7 @@
 import { callServer } from '/imports/ui/services/api/index.js';
 import ClientServices from '/imports/ui/services/client-settings/index.js';
 
-const getSavedFontSize = () => ClientServices.getFontSize();
+const getSavedFontSize = () => ClientServices.getSavedFontSize();
 
 
 const getSavedFontSizeName = () => {
@@ -22,14 +22,15 @@ const saveTempIncFontChanges = function saveTempIncFontChanges() {
   console.log("settings service::saveTempIncFontChanges this");
   console.log(this); // ApplicationMenu
 
+  const fs = Math.min(this.props.tempFontSize + 1, ClientServices.fontSizeEnum.EXTRA_LARGE);
   // Apply the CSS
-  ClientServices.applyFontSize.call(this);
+  ClientServices.applyFontSize(fs);
 
   console.log("settings service::validate and return");
-  console.log(Math.min(this.props.tempFontSize + 1, ClientServices.fontSizeEnum.EXTRA_LARGE));
+  console.log(fs);
 
   // Validate range of tempFontSize and return
-  return Math.min(this.props.tempFontSize + 1, ClientServices.fontSizeEnum.EXTRA_LARGE);
+  return fs
 };
 
 const saveTempDecFontChanges = function saveTempDecFontChanges() {
@@ -37,17 +38,26 @@ const saveTempDecFontChanges = function saveTempDecFontChanges() {
   console.log("settings service::saveTempDecFontChanges this");
   console.log(this); // ApplicationMenu
 
+  const fs = Math.max(this.props.tempFontSize - 1, ClientServices.fontSizeEnum.EXTRA_SMALL);
+
   // Apply the CSS
-  ClientServices.applyFontSize.call(this);
+  ClientServices.applyFontSize(fs);
 
   console.log("settings service::validate and return");
-  console.log(Math.max(this.props.tempFontSize - 1, ClientServices.fontSizeEnum.EXTRA_SMALL));
+  console.log(fs);
 
   // Validate range of tempFontSize and return
-  return Math.max(this.props.tempFontSize - 1, ClientServices.fontSizeEnum.EXTRA_SMALL);
+  return fs;
+};
+
+const savePermanentSettings = (key, value) => {
+  console.log("settings service::savePermanentSettings");
+
+  ClientServices.storePermanentSettings(key, value);
 };
 
 export default {
+  savePermanentSettings,
   getSavedFontSize,
   getSavedFontSizeName,
   getFontSizeName,

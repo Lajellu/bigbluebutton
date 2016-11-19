@@ -68,6 +68,8 @@ export default createContainer(() => {
       saveTempDecFontChangesHandler: function saveTempDecFontChangesHandler() {
         return SettingsService.saveTempDecFontChanges.call(this);
       },
+      savePermanentSettingsHandler: (key, value) =>
+          SettingsService.savePermanentSettings(key, value),
     },
   };
 }, SettingsContainer);
