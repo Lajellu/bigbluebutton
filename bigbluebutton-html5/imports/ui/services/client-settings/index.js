@@ -95,7 +95,6 @@ class ClientServices {
 
   static getSavedFontSizeName() {
     console.log("client-services::getSavedFontSizeName()");
-
     // console.log("this");
     // console.log(this);
     // console.log("this.props");
@@ -106,7 +105,6 @@ class ClientServices {
     // console.log(ClientServices.fontSizeEnum.properties);
     // console.log("ClientServices.fontSizeEnum.properties[this.props.savedFontSize]");
     // console.log(ClientServices.fontSizeEnum.properties[this.props.savedFontSize]);
-
     const existingFontSize = localStorage.getItem('tempFontSize');
 
     console.log(ClientServices.fontSizeEnum.properties[existingFontSize].name);

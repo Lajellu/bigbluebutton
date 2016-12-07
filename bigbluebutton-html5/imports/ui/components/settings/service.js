@@ -22,7 +22,8 @@ const saveTempIncFontChanges = function saveTempIncFontChanges() {
   console.log("settings service::saveTempIncFontChanges this");
   console.log(this); // ApplicationMenu
 
-  const fs = Math.min(this.props.tempFontSize + 1, ClientServices.fontSizeEnum.EXTRA_LARGE);
+  const fs = Math.min(Number(this.props.tempFontSize) + 1, ClientServices.fontSizeEnum.EXTRA_LARGE);
+
   // Apply the CSS
   ClientServices.applyFontSize(fs);
 
@@ -38,7 +39,7 @@ const saveTempDecFontChanges = function saveTempDecFontChanges() {
   console.log("settings service::saveTempDecFontChanges this");
   console.log(this); // ApplicationMenu
 
-  const fs = Math.max(this.props.tempFontSize - 1, ClientServices.fontSizeEnum.EXTRA_SMALL);
+  const fs = Math.max(Number(this.props.tempFontSize) - 1, ClientServices.fontSizeEnum.EXTRA_SMALL);
 
   // Apply the CSS
   ClientServices.applyFontSize(fs);

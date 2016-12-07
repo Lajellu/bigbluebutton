@@ -42,11 +42,7 @@ export default class ApplicationMenu extends BaseMenu {
     console.log("application::saveTempIncFontChanges fs");
     console.log(fs);
 
-    // Save the temp changes in parent state (with rest of temp changes)
-    //////////////////////////////////////////////////////////////////////////////////////////////////////
-    // Changes to the settings state should trigger rerender, and cause appl.props.tempFontSize to change
-    //////////////////////////////////////////////////////////////////////////////////////////////////////
-    this.props.saveTempChanges("tempFontSize", fs);
+    this.props.saveTempChanges('tempFontSize', fs);
   }
 
   saveTempDecFontChanges() {
@@ -56,7 +52,7 @@ export default class ApplicationMenu extends BaseMenu {
     const fs = this.props.actions.saveTempDecFontChangesHandler.call(this);
 
     // Save the temp changes in parent state (with rest of temp changes)
-    this.props.saveTempChanges("tempFontSize", fs);
+    this.props.saveTempChanges('tempFontSize', fs);
   }
 
   getContent() {
