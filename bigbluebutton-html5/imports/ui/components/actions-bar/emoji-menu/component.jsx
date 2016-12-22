@@ -8,6 +8,7 @@ import DropdownContent from '/imports/ui/components/dropdown/content/component';
 import DropdownList from '/imports/ui/components/dropdown/list/component';
 import DropdownListItem from '/imports/ui/components/dropdown/list/item/component';
 import DropdownListSeparator from '/imports/ui/components/dropdown/list/separator/component';
+import styles from './styles.scss';
 
 const propTypes = {
   // Emoji status of the current user
@@ -45,7 +46,7 @@ class EmojiMenu extends Component {
             onClick={() => null}
           />
         </DropdownTrigger>
-        <DropdownContent placement="top left">
+        <DropdownContent className={styles.dropdownMenu} placement="top left">
           <DropdownList>
             <DropdownListItem
               icon="raiseHand"
