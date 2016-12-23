@@ -1,6 +1,7 @@
 import React, { Component, PropTypes, Children, cloneElement } from 'react';
 import cx from 'classnames';
 import styles from '../styles';
+import Button from '/imports/ui/components/button/component';
 
 const PLACEMENTS = [
   'top left', 'top', 'top right',
@@ -39,7 +40,21 @@ export default class DropdownContent extends Component {
       <div
         style={style}
         aria-expanded={this.props['aria-expanded']}
-        className={cx(styles.content, styles[placementName], className)}>
+        className={cx(styles.content, styles[placementName], className)}
+      >
+        {/*TODO: Add a boolean to display only if screen width < 600px*/}
+        <Button
+          label="close" // {intl.formatMessage(intlMessages.optionsLabel)}
+          icon="close"
+          id="mobileCloseButton"
+          ghost={true}
+          circle={true}
+          hideLabel={true}
+          className={cx(styles.btn)}
+
+          // TODO: Close the menu onclick
+          onClick={() => null}
+        />
         {boundChildren}
       </div>
     );
